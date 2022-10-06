@@ -26,7 +26,11 @@ export default function ContactForm({ onSubmit }) {
       exit: 'animate__animated animate__bounceOut',
     });
 
-    if (contacts.find(contact => contact.name === name)) {
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       toast.warn(`${name} is already in contacts`, {
         transition: bounce,
         dragable: true,
