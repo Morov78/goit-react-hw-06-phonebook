@@ -17,8 +17,10 @@ export default function ContactForm({ onSubmit }) {
     event.preventDefault();
 
     const form = event.target;
-    const name = form.elements.name.value;
     const number = form.elements.number.value;
+    let name = form.elements.name.value;
+
+    name = name[0].toUpperCase() + name.substring(1);
 
     const warnToastId = 'toast-id';
     const bounce = cssTransition({
@@ -26,11 +28,7 @@ export default function ContactForm({ onSubmit }) {
       exit: 'animate__animated animate__bounceOut',
     });
 
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase()
-      )
-    ) {
+    if (contacts.find(contact => contact.name === name)) {
       toast.warn(`${name} is already in contacts`, {
         transition: bounce,
         dragable: true,
